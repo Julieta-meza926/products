@@ -38,7 +38,6 @@ public class ProductController {
 
     @GetMapping("/public")
     public String publicEndpoint() {
-
         return "Endpoint publico";
     }
 }

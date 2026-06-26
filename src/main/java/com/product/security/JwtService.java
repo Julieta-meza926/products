@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class JwtService {
 
     private static final String SECRET =
-            "my-super-secret-key-my-super-secret-key";
+            "my-super-secret-key-my-super-secret-key-123456";
 
     public String extractEmail(String token) {
 

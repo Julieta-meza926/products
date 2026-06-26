@@ -1,0 +1,16 @@
+debug: true
+
+spring:
+  application:
+    name: productos
+
+  data:
+    mongodb:
+      uri: mongodb://admin:admin123@localhost:27017/productos?authSource=admin
+
+server:
+  port: 8082
+
+jwt:
+  secret: my-super-secret-key-my-super-secret-key-123456
+  expiration: 86400000
