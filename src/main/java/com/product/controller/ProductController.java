@@ -3,32 +3,42 @@ package com.product.controller;
 import com.product.model.Product;
 import com.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
 
+
     private final ProductService productService;
 
+
     @GetMapping("/me")
-    public String me(Authentication authentication) {
+    public String me(
+            Authentication authentication
+    ) {
 
         return "Usuario autenticado: "
                 + authentication.getName();
     }
 
+
     @GetMapping
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
     public List<Product> getProducts() {
 
         return productService.getAll();
     }
 
+
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public Product createProduct(
             @RequestBody Product product
     ) {
@@ -36,8 +46,20 @@ public class ProductController {
         return productService.save(product);
     }
 
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void deleteProduct(
+            @PathVariable String id
+    ) {
+
+        productService.delete(id);
+    }
+
+
     @GetMapping("/public")
     public String publicEndpoint() {
+
         return "Endpoint publico";
     }
 }

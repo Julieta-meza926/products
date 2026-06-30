@@ -22,4 +22,9 @@ public class ProductService {
 
         return repository.save(product);
     }
+
+    public void delete(String id) {
+
+        repository.deleteById(id);
+    }
 }

@@ -11,6 +11,7 @@ public class JwtService {
 
     private final String secret;
 
+
     public JwtService(
             @Value("${jwt.secret}") String secret
     ) {
@@ -22,6 +23,13 @@ public class JwtService {
 
         return extractClaims(token)
                 .getSubject();
+    }
+
+
+    public String extractRole(String token) {
+
+        return extractClaims(token)
+                .get("role", String.class);
     }
 
 
